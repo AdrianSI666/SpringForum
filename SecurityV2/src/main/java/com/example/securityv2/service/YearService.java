@@ -33,6 +33,10 @@ public class YearService {
         log.info("Getting year {}",name);
         return yearRepository.findByName(name).orElseThrow(()-> new NotFoundException(String.format(YEAR_NOT_FOUND_MSG, name)));
     }
+    public List<Year> getYearsByFaculty(String name){
+        log.info("Getting years by faculty {}", name);
+        return yearRepository.findByFaculty(facultyRepository.findByName(name).orElseThrow(()-> new NotFoundException(String.format(FACULTY_NOT_FOUND_MSG, name))));
+    }
 
     public Year saveYear(Year year) {
         log.info("Saving new year {}",year.getName());

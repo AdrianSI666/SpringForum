@@ -29,13 +29,21 @@ public class CommentaryService {
             "user with email %s not found";
 
     public List<Commentary> getCommentary() {
-        log.info("Getting all commentaries");
+        log.info("Getting all comments");
         return commentaryRepository.findAll();
     }
 
     public Commentary getCommentary(Long id) {
         log.info("Getting commentary {}",id);
         return commentaryRepository.findById(id).orElseThrow(()-> new NotFoundException(String.format(Commentary_NOT_FOUND_MSG, id)));
+    }
+    public List<Commentary> getCommentaryByUser(String email) {
+        log.info("Getting commentary by user {}",email);
+        return commentaryRepository.findByUser(userRepository.findByEmail(email).orElseThrow(()->new NotFoundException(String.format(USER_NOT_FOUND_MSG, email))));
+    }
+    public List<Commentary> getCommentaryByTrain(String name) {
+        log.info("Getting commentary by train {}",name);
+        return commentaryRepository.findByTrain(trainRepository.findByName(name).orElseThrow(()->new NotFoundException(String.format(TRAIN_NOT_FOUND_MSG, name))));
     }
 
     public Commentary saveCommentary(Commentary commentary) {

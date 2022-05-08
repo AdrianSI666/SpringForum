@@ -32,6 +32,10 @@ public class TrainService {
         log.info("Getting train {}",name);
         return trainRepository.findByName(name).orElseThrow(()-> new NotFoundException(String.format(TRAIN_NOT_FOUND_MSG, name)));
     }
+    public List<Train> getTrainsBySubject(String name){
+        log.info("Getting trains by subject {}", name);
+        return trainRepository.findBySubject(subjectRepository.findByName(name).orElseThrow(()-> new NotFoundException(String.format(Subject_NOT_FOUND_MSG, name))));
+    }
 
     public Train saveTrain(Train train) {
         log.info("Saving new train {}",train.getName());

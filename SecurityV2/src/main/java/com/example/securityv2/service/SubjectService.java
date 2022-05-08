@@ -32,6 +32,10 @@ public class SubjectService {
         log.info("Getting subject {}",name);
         return subjectRepository.findByName(name).orElseThrow(()-> new NotFoundException(String.format(Subject_NOT_FOUND_MSG, name)));
     }
+    public List<Subject> getSubjectByYear(String name){
+        log.info("Getting subject by year {}", name);
+        return subjectRepository.findByYear(yearRepository.findByName(name).orElseThrow(()-> new NotFoundException(String.format(YEAR_NOT_FOUND_MSG, name))));
+    }
 
     public Subject saveSubject(Subject subject) {
         log.info("Saving new subject {}",subject.getName());

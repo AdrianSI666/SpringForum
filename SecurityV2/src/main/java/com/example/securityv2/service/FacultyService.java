@@ -34,6 +34,10 @@ public class FacultyService{
         log.info("Getting faculty {}",name);
         return facultyRepository.findByName(name).orElseThrow(()-> new NotFoundException(String.format(FACULTY_NOT_FOUND_MSG, name)));
     }
+    public List<Faculty> getFacultyByInstitute(String name){
+        log.info("Getting commentary by train {}",name);
+        return facultyRepository.findByInstitute(instituteRepository.findByName(name).orElseThrow(()->new NotFoundException(String.format(FACULTY_NOT_FOUND_MSG, name))));
+    }
 
     public Faculty saveFaculty(Faculty faculty) {
         log.info("Saving new faculty {}",faculty.getName());
