@@ -7,18 +7,21 @@
         class="profile-img-card"
       /> -->
       <Form @submit="handleLogin" :validation-schema="schema">
-        <div class="form-group">
-          <label for="username">Username</label>
+        <div class="subforum-title">
+                <h1>Logowanie</h1>
+            </div>
+        <div class=" subforum-description subforum-column form-group">
+          <label for="username">E-mail</label>
           <Field name="username" type="text" class="form-control" />
           <ErrorMessage name="username" class="error-feedback" />
         </div>
-        <div class="form-group">
+        <div class="subforum-description subforum-column form-group">
           <label for="password">Password</label>
           <Field name="password" type="password" class="form-control" />
           <ErrorMessage name="password" class="error-feedback" />
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block" :disabled="loading">
+          <button class="subforum-icon subforum-column center button " :disabled="loading">
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
@@ -32,6 +35,7 @@
           </div>
         </div>
       </Form>
+      <p>Nie masz konta? <router-link to="/register">Stwórz je.</router-link></p>
     </div>
   </div>
 </template>
@@ -48,7 +52,7 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      username: yup.string().required("Username is required!"),
+      username: yup.string().required("E-mail is required!"),
       password: yup.string().required("Password is required!"),
     });
     return {
@@ -60,6 +64,7 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
+
     },
   },
   created() {
@@ -74,15 +79,17 @@ export default {
       AuthService.login(user).then(
         () => {
           this.$router.push("/profile");
+                location.reload();
+
         },
         (error) => {
           this.loading = false;
-          this.message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+          this.message = "Błędny e-mail bądź hasło"
+            // (error.response &&
+            //   error.response.data &&
+            //   error.response.data.message) ||
+            // error.message ||
+            // error.toString();
         }
       );
     },

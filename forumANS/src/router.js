@@ -2,6 +2,13 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "./components/Home.vue";
 import Login from "./components/Login.vue";
 import Register from "./components/Register.vue";
+import Instytut from "./components/Instytut.vue";
+import Przedmiot from "./components/Przedmiot.vue";
+import Temat from "./components/Temat.vue";
+import Faculty from "./components/Faculty.vue";
+import Subject from "./components/Subject.vue";
+
+
 // lazy-loaded
 const Profile = () => import("./components/Profile.vue")
 // const BoardAdmin = () => import("./components/BoardAdmin.vue")
@@ -18,8 +25,28 @@ const routes = [
     component: Home,
   },
   {
+    path: "/instytut",
+    component: Instytut,
+  },
+  {
+    path: "/temat",
+    component: Temat,
+  },
+  {
+    path: "/przedmiot",
+    component: Przedmiot,
+  },
+  {
+    path: "/Faculty",
+    component: Faculty,
+  },
+  {
     path: "/login",
     component: Login,
+  },
+  {
+    path:"/subject",
+    component:Subject,
   },
   {
     path: "/register",
@@ -30,6 +57,7 @@ const routes = [
     name: "profile",
     // lazy-loaded
     component: Profile,
+    
   },
 //   {
 //     path: "/admin",

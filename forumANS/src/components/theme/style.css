@@ -13,7 +13,7 @@ html{
 }
 
 a{
-    color:#fecb0e;
+    color:#ffffff;
     font-weight: bolder;
     text-decoration: none;
 }
@@ -481,11 +481,114 @@ footer{
 {
     width: 20%;
     cursor: pointer;
+    color:white;
+    border: 0px;
+}
+
+.error-feedback
+{
+    float: right;
+    color:red;
+}
+.form-group
+{
+    padding-bottom: 20px;
+}
+.form-control
+{
+    background-color: rgba(0,0,0,0.1);
+    border: 0;
+    height: 100%;
+    width: 100%;
+    color:white;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 
 
+.tagname
+{
+    font-size: 40px;
+}
+.image-container {
+    margin:10px; 
+    width: 200px;
+    height: 200px;
+    background-color:red;
+    background-image: url('https://bmspolska.pl/wp-content/uploads/2020/05/unnamed.png');
+    background-size: cover;
+    float: right;
+  
+  }
 
+  #rate
+  {
+      margin-top:220px;
+      margin-right:-125px;
+      float: right;
+      color:grey;
+      font-size: 20px;
+      font:bold;
+  }
 
+  .przedmiot
+  {
+      cursor: pointer;
+  }
+  .przedmiot:hover
+  {
+      color:#fecb0e;
+  }
 
+  .right
+  {
+      float: right;
+  }
 
+  .big{
+      font-size:40px;
+  }
+
+  #logout{
+      height: 50px;
+      width: 50px;
+      background-image: url(../../assets/logout.png);
+      background-size: cover;
+      cursor: pointer;
+  }
+  .pointer
+  {
+      cursor:pointer;
+  }
+
+  
+
+  .lewo
+  {
+      float: left;
+  }
+ u{
+     cursor: pointer;
+ }
+  .autor{
+    margin:10px; 
+    width: 200px;
+    height: 200px;
+    background-color:red;
+    background-image: url('https://bmspolska.pl/wp-content/uploads/2020/05/unnamed.png');
+    background-size: cover;
+    float: right;
+  
+  }
+  .train
+  {
+      height: 70px;
+      width: 70px;
+      float: left;
+      margin-left:0px;
+      color:black;
+      text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+      vertical-align: bottom;
+
+  }

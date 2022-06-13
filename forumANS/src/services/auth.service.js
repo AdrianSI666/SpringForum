@@ -1,5 +1,7 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:8090/api';
+import authHeader from './auth-header';
+
 class AuthService {
   login(user) {
     //debugger
@@ -38,5 +40,13 @@ class AuthService {
       password: user.password
     });
   }
+  sendcomment(data) {
+    //debugger
+    return axios
+      .post(API_URL + '/commentary/save',data,{headers: authHeader("json")})
+    
+  }
+  
+
 }
 export default new AuthService();
