@@ -24,4 +24,8 @@ public class Subject {
     @JoinColumn(name = "year_id")
     private Year year;
 
+    public Subject(String name, Year year) {
+        this.name = name;
+        this.year = year;
+    }
 }

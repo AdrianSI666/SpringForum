@@ -44,7 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh", "/api/registration/**", "/api/users").permitAll();
+        http.authorizeRequests().antMatchers("/api/login/**",
+                "/api/token/refresh",
+                "/api/registration/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/users",
+                "/api/institute/save/**",
+                "/api/faculty/save/**",
+                "/api/faculty/find/**",
+                "/api/faculties").hasAnyAuthority("User");
         http.authorizeRequests().antMatchers(GET, "/api/user/***").hasAnyAuthority("User");
         http.authorizeRequests().antMatchers(POST, "/api/user/save/***").hasAnyAuthority("Admin");
         http.authorizeRequests().anyRequest().authenticated();
@@ -56,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:8091"));
         corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
                 "Accept", "Authorization", "Origin, Accept", "X-Requested-With",
                 "Access-Control-Request-Method", "Access-Control-Request-Headers","Access-Control-Allow-Methods"));

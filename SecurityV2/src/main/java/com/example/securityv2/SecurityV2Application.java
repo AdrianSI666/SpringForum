@@ -24,21 +24,21 @@ public class SecurityV2Application {
         SpringApplication.run(SecurityV2Application.class, args);
     }
 
-    @Bean
+    /*@Bean
     CommandLineRunner commandLineRunner(UserService userService){
         return args -> {
-            /*userService.saveRole(new Role(null,"User"));
+            *//*userService.saveRole(new Role(null,"User"));
             userService.saveRole(new Role(null,"Admin"));
             userService.saveUser(new User(19333,"ania","ania",null,"wdym","ania@test.pl",new ArrayList<Role>(),new ArrayList<Badge>()));
             userService.addRoleToUser("ania@test.pl","User");
             userService.saveUser(new User(19426,"adrian","adrian",null,"iwtd","adrian@test.pl",new ArrayList<Role>(),new ArrayList<Badge>()));
             userService.addRoleToUser("adrian@test.pl","Admin");
             userService.enableUser("ania@test.pl");
-            userService.enableUser("adrian@test.pl");*/
-            /*userService.saveUser(new User(null,19426,"adrian","adrian",null,"wdym","adrian",new ArrayList<Role>()));
-            userService.addRoleToUser("adrian","Admin");*/
+            userService.enableUser("adrian@test.pl");*//*
+            *//*userService.saveUser(new User(null,19426,"adrian","adrian",null,"wdym","adrian",new ArrayList<Role>()));
+            userService.addRoleToUser("adrian","Admin");*//*
         };
-    }
+    }*/
 
 
 

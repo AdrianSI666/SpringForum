@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +20,11 @@ public class Institute {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    /*@OneToMany(mappedBy = "institute") //Gdy tak się robi, to trzeba dwóstronnie zapisywać relację, dodać do instytutu uczelnie i instytut do uczelni
+    private List<Faculty> faculty;*/
+
+    public Institute(String name) {
+        this.name = name;
+    }
 }

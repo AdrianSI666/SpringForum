@@ -24,7 +24,7 @@ spring:
     mail:
         host: smtp-mail.outlook.com
         port: 587
-        username: forumanstabm@outlook.com #imie Scrum nazwisko Master
+        username: forumans2@outlook.com #imie Scrum nazwisko Master
         password: ScrumMasturbatoR3
 
         properties:

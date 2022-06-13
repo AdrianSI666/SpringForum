@@ -1,0 +1,40 @@
+server:
+    port: 8090
+spring:
+    datasource:
+        url: jdbc:h2://mem:db;DB_CLOSE_DELAY=-1
+        username: sa
+        password: sa
+        driverClassName: org.h2.Driver
+    jpa:
+        hibernate:
+        ddl-auto: create-drop
+        generate-ddl: true
+    properties:
+        hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            format_sql: true
+    show-sql: true
+    database: postgresql
+
+    mail:
+        host: smtp-mail.outlook.com
+        port: 587
+        username: forumanstabm@outlook.com #imie Scrum nazwisko Master
+        password: ScrumMasturbatoR3
+
+        properties:
+            mail:
+                smtp:
+                    ssl:
+                        trust: "*"
+                    auth: true
+                    starttls:
+                        enable: true
+                        required: true
+                    connectiontimeout: 5000
+                    timeout: 3000
+                    writetimeout: 5000
+                    socketFactory:
+                        port: 465
+                        class: javax.net.ssl.SSLSocketFactory

@@ -24,4 +24,8 @@ public class Year {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    public Year(String name, Faculty faculty) {
+        this.name = name;
+        this.faculty = faculty;
+    }
 }

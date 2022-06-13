@@ -1,6 +1,7 @@
 package com.example.securityv2.registration.token;
 
 import com.example.securityv2.domain.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,6 +44,7 @@ public class ConfirmationToken {
             nullable = false,
             name = "user_id"
     )
+    @JsonBackReference(value = "UserTokens")
     private User user;
 
     public ConfirmationToken(String token,

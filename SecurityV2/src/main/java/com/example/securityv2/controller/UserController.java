@@ -64,6 +64,11 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/user/rating/{email}")
+    public ResponseEntity<Integer> getRating(@PathVariable("email")String email){
+        return ResponseEntity.ok().body(userService.getRating(email));
+    }
+
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> getRoles(){
         return ResponseEntity.ok().body(userService.getRoles());

@@ -1,7 +1,9 @@
 package com.example.securityv2.controller;
 
+import com.example.securityv2.domain.Faculty;
 import com.example.securityv2.domain.Year;
 import com.example.securityv2.service.YearService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,16 +28,16 @@ public class YearController {
         return ResponseEntity.ok().body(yearService.getYear(name));
     }
 
-    @GetMapping("/year/find/{institute}")
-    public ResponseEntity<List<Year>> getYearsByFaculty(@PathVariable("institute")String name){
+    @GetMapping("/year/find")
+    public ResponseEntity<List<Year>> getYearsByFaculty(@RequestParam(value = "faculty")String name){
         return ResponseEntity.ok().body(yearService.getYearsByFaculty(name));
     }
 
     @PostMapping("/year/save")
-    public ResponseEntity<Year> saveYear(@RequestBody Year year){
+    public ResponseEntity<Year> saveYear(@RequestBody FacultyToYear facultyToYear){
         URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/year/save").toUriString());
-        yearService.saveYear(year);
-        yearService.setFacultyToYear(year.getName(),year.getFaculty().getName());
+        Year year=yearService.saveYear(facultyToYear.getYear());
+        yearService.setFacultyToYear(year.getName(),facultyToYear.getFacultyName());
         return ResponseEntity.created(uri).body(year);
     }
 
@@ -49,4 +51,9 @@ public class YearController {
         yearService.deleteYear(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+}
+@Data
+class FacultyToYear{
+    private Year year;
+    private String facultyName;
 }

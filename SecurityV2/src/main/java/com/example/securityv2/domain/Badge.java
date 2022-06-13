@@ -19,4 +19,8 @@ public class Badge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    public Badge(String name) {
+        this.name = name;
+    }
 }

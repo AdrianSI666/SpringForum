@@ -2,6 +2,7 @@ package com.example.securityv2.service;
 
 import com.example.securityv2.domain.Role;
 import com.example.securityv2.domain.User;
+import com.example.securityv2.exception.BadRequestException;
 import com.example.securityv2.registration.token.ConfirmationToken;
 import com.example.securityv2.registration.token.ConfirmationTokenService;
 import com.example.securityv2.repository.RoleRepository;
@@ -52,6 +53,12 @@ public class UserService implements UserDetailsService {
     }
 
     public User saveUser(User user) {
+        Boolean existEmail = userRepository.findByEmail(user.getEmail()).isPresent();
+        if(existEmail){
+            throw new BadRequestException(
+                    "Email " + user.getEmail() + " already taken"
+            );
+        }
         log.info("Saving new user {}",user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
@@ -141,5 +148,15 @@ public class UserService implements UserDetailsService {
     public int enableUser(String email) {
         log.info("Enabling user {}", email);
         return userRepository.enableUser(email);
+    }
+
+    public int getRating(String email){
+        User user=userRepository.findByEmail(email).orElseThrow(()->
+                new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
+        log.info("Getting ratings from trains with user: {}", email);
+        int trainRating=userRepository.getTrainsRating(email).orElseGet(()->0);
+        log.info("Getting ratings from comments with user: {}", email);
+        int commentsRating=userRepository.getCommentariesRating(email).orElseGet(()->0);
+        return trainRating+commentsRating;
     }
 }

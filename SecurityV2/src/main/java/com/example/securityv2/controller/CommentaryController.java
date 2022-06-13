@@ -2,12 +2,15 @@ package com.example.securityv2.controller;
 
 import com.example.securityv2.domain.Commentary;
 import com.example.securityv2.service.CommentaryService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -26,21 +29,21 @@ public class CommentaryController {
         return ResponseEntity.ok().body(commentaryService.getCommentary(id));
     }
 
-    @GetMapping("/comment/find/{user}")
-    public ResponseEntity<List<Commentary>> getCommentaryByUser(@PathVariable("user")String email){
+    @GetMapping("/comment/findByUser")
+    public ResponseEntity<List<Commentary>> getCommentaryByUser(@RequestParam(value = "user")String email){
         return ResponseEntity.ok().body(commentaryService.getCommentaryByUser(email));
     }
-    @GetMapping("/comment/find/{train}")
-    public ResponseEntity<List<Commentary>> getCommentaryByTrain(@PathVariable("train")String name){
+    @GetMapping("/comment/findByTrain")
+    public ResponseEntity<List<Commentary>> getCommentaryByTrain(@RequestParam(value = "train")String name){
         return ResponseEntity.ok().body(commentaryService.getCommentaryByTrain(name));
     }
 
     @PostMapping("/commentary/save")
-    public ResponseEntity<Commentary> saveCommentary(@RequestBody Commentary commentary){
+    public ResponseEntity<Commentary> saveCommentary(@RequestBody CommentaryByUserToTrain commentByUserToTrain){
         URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/commentary/save").toUriString());
-        commentaryService.saveCommentary(commentary);
-        commentaryService.setUserToCommentary(commentary.getId(),commentary.getUser().getEmail());
-        commentaryService.setTrianToCommentary(commentary.getId(),commentary.getTrain().getName());
+        Commentary commentary=commentaryService.saveCommentary(commentByUserToTrain.getCommentary());
+        commentaryService.setUserToCommentary(commentary.getId(),commentByUserToTrain.getUserEmail());
+        commentaryService.setTrianToCommentary(commentary.getId(),commentByUserToTrain.getTrainName());
         return ResponseEntity.created(uri).body(commentary);
     }
 
@@ -54,4 +57,36 @@ public class CommentaryController {
         commentaryService.deleteCommentary(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/commentary/increment/{name}")
+    public ResponseEntity<?> incrementCommentaryByName(@PathVariable("name")Long id){
+        commentaryService.incrementRate(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/commentary/decrement/{name}")
+    public ResponseEntity<?> decrementCommentaryByName(@PathVariable("name")Long id){
+        commentaryService.decrementRate(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/commentary/attachment")
+    public ResponseEntity<?> uploadImgaeToDB(@RequestParam("imageFile") ImageToCommentary file) throws IOException {
+        byte[] imageArr = file.getImageFile().getBytes();
+        commentaryService.setAttachmentTo(imageArr,file.getCommentId());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+}
+@Data
+class ImageToCommentary{
+    private MultipartFile imageFile;
+    private Long commentId;
+}
+
+@Data
+class CommentaryByUserToTrain{
+    private Commentary commentary;
+    private String trainName;
+    private String userEmail;
 }

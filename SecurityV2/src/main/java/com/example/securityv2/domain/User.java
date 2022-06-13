@@ -21,6 +21,7 @@ public class User {
     private String nickname;
     private String password;
     private String icon;
+    @Lob
     private String description;
     private String email;
     @ManyToMany(fetch = FetchType.EAGER)
