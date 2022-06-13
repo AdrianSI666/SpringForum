@@ -1,5 +1,6 @@
 # SpringForum
 
-Project in which I started learning spring. This is a forum for students.
+Backup of project in which I started learning spring. This is a forum for students.
 
-Still in work, my job was to do back-end.
+It was a group project, but my friends didn't make a proper frontend. It was chaotic, so my code went kinda chaotic too.
+It's a last update made.
